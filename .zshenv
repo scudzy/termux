@@ -2,7 +2,7 @@
 # echo "source ${HOME}/.config/zsh/.zshenv" >| ${HOME}/.zshenv
 
 # export ZDOTDIR="${HOME}/.dotfiles/zsh"
-export DOTFILES="${HOME}/.dotfiles"
+export DOTFILES="${HOME}/dotfiles"
 # Set XDG dirs
 export XDG_CONFIG_HOME="${HOME}/.config"
 export XDG_CACHE_HOME="${HOME}/.cache"
@@ -33,15 +33,15 @@ export PASSWORD_STORE_GENERATED_LENGTH="20"
 export RCLONE_PASSWORD_COMMAND="pass garbage/wsl2/rclone-deb10"
 export COWPATH="${HOME}/.cowsay/cowfiles:$COWPATH"
 # If you come from bash you might have to change your $PATH.
-export PATH="${HOME}/.local/bin:${HOME}/.dotfiles/sh:/c/Windows/System32/:$PATH"
+export PATH="${HOME}/.local/bin:${HOME}/dotfiles/sh::$PATH"
 #export PATH="${HOME}/.local/bin:${HOME}/dotfiles/sh:${HOME}/.local/lib/python3.9/site-packages:/c/Windows/System32/:$PATH"
 
 # WSL2IP=$(/sbin/ip route | awk '/default/ { print $3 }'):0.0
-WSL2IP=$(/sbin/ip route | awk '{print $3; exit;}')
+#WSL2IP=$(/sbin/ip route | awk '{print $3; exit;}')
 # WSL2IP="`ip -4 address | grep -A1 eth0 | grep inet | cut -d' ' -f6 | cut -d/ -f1`:0.0"
 # export DISPLAY=$(ipconfig.exe | awk '/IPv4/ {sub("\r",":0"); print $NF;exit}')
 # export DISPLAY=192.168.1.120:0
-export DISPLAY=$WSL2IP:0
+#export DISPLAY=$WSL2IP:0
 # export PULSE_SERVER=tcp:"$DISPLAY"
 export LIBGL_ALWAYS_INDIRECT=1
 export NO_AT_BRIDGE=1
@@ -86,7 +86,6 @@ export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
 
 export EDITOR=vim
 export VISUAL=vim
-export BROWSER="/c/Program\ Files/Mozilla\ Firefox/firefox.exe"
 
 # Ripgrep
 export RG_PREFIX="rg --column --line-number --no-heading --color=always --smart-case "
