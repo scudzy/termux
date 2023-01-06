@@ -2,6 +2,9 @@ start="$(date +%s)"
 zmodload zsh/zprof
 zmodload -i zsh/complist
 #zstyle ':omz:update' mode auto
+export HOME="/data/data/com.termux/files/home"
+export PATH="$HOME/.local/bin:/data/data/com.termux/files/usr/bin:$PATH"
+export DOTFILES="/data/data/com.termux/files/home/dotfiles"
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -302,14 +305,6 @@ zinit light-mode for \
 # powerline9k prompt
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
 
-# fix mkdir permission
-if grep -q microsoft /proc/version; then
-    if [ "$(umask)" == '0000' ]; then
-        umask 0022
-    fi
-fi
-
-### Zinit
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-history-substring-search
 
@@ -359,19 +354,19 @@ zinit ice as"command" from"gh-r" mv"bat* -> bat" pick"bat/bat"
 zinit light sharkdp/bat
 
 # ogham/exa, replacement for ls
-zinit ice wait"2" lucid from"gh-r" as"program" mv"exa* -> exa"
-zinit light ogham/exa
+#zinit ice wait"2" lucid from"gh-r" as"program" mv"exa* -> exa"
+#zinit light ogham/exa
 
 # All of the above using the for-syntax and also z-a-bin-gem-node annex
 zinit wait"1" lucid from"gh-r" as"null" for \
      sbin"**/fd"        @sharkdp/fd \
-     sbin"**/bat"       @sharkdp/bat \
-     sbin"exa* -> exa"  ogham/exa
+     sbin"**/bat"       @sharkdp/bat
+#     sbin"exa* -> exa"  ogham/exa
 
 # vim/vim
 #zinit ice as"program" atclone"rm -f src/auto/config.cache; ./configure" \
 # atpull"%atclone" make pick"src/vim"
-zinit light vim/vim
+#zinit light vim/vim
 
 # forgit
 zinit ice wait lucid
@@ -387,11 +382,7 @@ zinit light romkatv/powerlevel10k
 ### End of zinit line
 
 # z.lua
-eval "$(lua ~/.dotfiles/z.lua/z.lua --init zsh enhanced once fzf)"
-
-# powerline
-/usr/bin/powerline-daemon -q
-source /usr/share/powerline/bindings/zsh/powerline.zsh
+eval "$(lua /data/data/com.termux/files/home/z.lua/z.lua --init zsh enhanced once fzf )"
 
 # Color Ayu Mirage
 export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
@@ -418,7 +409,7 @@ unset PIDFOUND
 # eval "$(oh-my-posh init zsh --config '/home/linuxbrew/.linuxbrew/opt/oh-my-posh/themes/negligible.omp.json')"
 
 # zalias
-source /home/scudzy/.dotfiles/.zalias.zsh
+source ~/dotfiles/.zalias.zsh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -433,14 +424,8 @@ export FZF_DEFAULT_OPTS="--ansi"
 # grc
 [[ -s "/etc/grc.zsh" ]] && source /etc/grc.zsh
 
-# Windows Terminal
-function settitle () {
-  export PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$'
-  echo -ne '\033]0;'"$1"'\a'
-}
-
 # load function folders ----------- NEVER DELETE BELOW RHIS LINE
-fpath=( $DOTFILES/functions "${fpath[@]}" )
+fpath=(~/dotfiles/functions "${fpath[@]}" )
 autoload -Uz $fpath[1]/*(.:t)
 
 # load at startup
