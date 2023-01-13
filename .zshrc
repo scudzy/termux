@@ -3,7 +3,7 @@ zmodload zsh/zprof
 zmodload -i zsh/complist
 #zstyle ':omz:update' mode auto
 export HOME="/data/data/com.termux/files/home"
-export PATH="$HOME/.local/bin:/data/data/com.termux/files/usr/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 export DOTFILES="/data/data/com.termux/files/home/dotfiles"
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -406,7 +406,7 @@ fi
 unset PIDFOUND
 
 # omp
-# eval "$(oh-my-posh init zsh --config '/home/linuxbrew/.linuxbrew/opt/oh-my-posh/themes/negligible.omp.json')"
+#eval "$(oh-my-posh init zsh --config '/data/data/com.termux/files/home/dotfiles/.poshthemes/negligible.omp.json')"
 
 # zalias
 source ~/dotfiles/.zalias.zsh
@@ -441,3 +441,4 @@ end="$(date +%s)"
 total="$(( end - start ))"
 echo ""
 printf "\e[0;97m 💠 Loading your blazing 🚀 fast ⚡ shell in\e[39m \e[1;92;5m$total\e[0m 🔥 \e[0;97mseconds 👻 \e[0m\n"
+termux-wake-lock
